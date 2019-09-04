@@ -25,24 +25,24 @@ import org.springframework.stereotype.Component;
 @EnableAuthorizationServer
 public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new CustomPasswordEncoder();
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-            .withClient("yueqi1")
-            .secret(passwordEncoder().encode("yueqisecret1"))
-            .authorizedGrantTypes("authorization_code","refresh_token")
+                .withClient("yueqi1")
+                .secret(passwordEncoder().encode("yueqisecret1"))
+                .authorizedGrantTypes("authorization_code", "refresh_token")
                 .redirectUris("http://localhost:9090/client1/login")
-            .scopes("all")
-            .and()
-            .withClient("yueqi2")
-            .secret(passwordEncoder().encode("yueqisecret2"))
-            .authorizedGrantTypes("authorization_code","refresh_token")
+                .scopes("all")
+                .and()
+                .withClient("yueqi2")
+                .secret(passwordEncoder().encode("yueqisecret2"))
+                .authorizedGrantTypes("authorization_code", "refresh_token")
                 .redirectUris("http://localhost:8060/client2/login")
-            .scopes("all");
+                .scopes("all");
     }
 
     @Override
@@ -52,6 +52,7 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
 
     /**
      * 认证服务器安全配置
+     *
      * @param security
      * @throws Exception
      */
@@ -62,15 +63,16 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
 
     /**
      * TokenStore 只关乎存取
+     *
      * @return
      */
     @Bean
-    public TokenStore jwtTokenStore(){
+    public TokenStore jwtTokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
     @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter(){
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
         //可以实现密签
         accessTokenConverter.setSigningKey("yueqi");

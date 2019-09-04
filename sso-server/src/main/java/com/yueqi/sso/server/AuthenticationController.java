@@ -26,6 +26,7 @@ public class AuthenticationController {
 
     /**
      * when need role authentication
+     *
      * @param request
      * @param response
      * @return
@@ -33,6 +34,6 @@ public class AuthenticationController {
     @RequestMapping("/authentication/require")
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public void requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        redirectStrategy.sendRedirect(request,response,"/signIn.html");
+        redirectStrategy.sendRedirect(request, response, "/signIn.html");
     }
 }

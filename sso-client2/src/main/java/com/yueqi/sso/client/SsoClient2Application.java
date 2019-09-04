@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @EnableOAuth2Sso
 public class SsoClient2Application {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(SsoClient2Application.class);
     }
 
 
     @GetMapping("/user")
-    public Authentication user(Authentication user){
+    public Authentication user(Authentication user) {
         return user;
     }
 }
